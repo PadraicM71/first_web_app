@@ -1,5 +1,6 @@
 # this is the backend
 # This handles the logic of receiving the name via a POST request and sending it back to the page.
+import os
 
 from flask import Flask, render_template, request
 
@@ -13,8 +14,16 @@ def index():
         name = request.form.get("user_name")
     return render_template("index.html", name=name)
 
+
+##### this is for local host:
+# if __name__ == "__main__":
+#     app.run(debug=True)
+
 if __name__ == "__main__":
-    app.run(debug=True)
+    # This picks up the port Render assigns automatically
+    port = int(os.environ.get("PORT", 5000))
+    # '0.0.0.0' makes it public instead of just "localhost"
+    app.run(host='0.0.0.0', port=port)
 
 
 # It is best practice to use a virtual environment so your Flask installation doesn't interfere with other Python projects. 
@@ -91,9 +100,6 @@ if __name__ == "__main__":
 
 
 # Now that your code is on GitHub, you can use a hosting service to pull that code and turn it into a live website. For beginners in 2024-2025, Render and PythonAnywhere are the most reliable free options. 
-# Hostinger
-# Hostinger
-#  +3
 # Step 1: Prepare Your Project for the Web
 # Before hosting, the server needs to know which libraries to install. In your terminal (on your computer), run:
 # bash
@@ -118,12 +124,16 @@ if __name__ == "__main__":
 # Build Command: pip install -r requirements.txt.
 # Start Command: If using Flask, use gunicorn app:app. If it's a simple script, use python app.py (i used this here)
 # Click Create Web Service. Within a few minutes, Render will give you a public onrender.com URL to share. 
-
+# ME: CHECK HOE RENDER UPDATES COMMITS AUTOMATICALLY!!!
 
 
 
 # ******************************************** IMPORTANT - updates!
 # 3. Future Updates
+
+# if needed:
+# pip freeze > requirements.txt
+
 # After you've done this the first time, you only need three commands to send new changes to GitHub: 
 # git add .
 # git commit -m "Update message"
